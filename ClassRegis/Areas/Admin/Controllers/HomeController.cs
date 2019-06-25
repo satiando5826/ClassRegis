@@ -35,29 +35,7 @@ namespace ClassRegis.Areas.Admin
             AdminVM.Rooms = await _db.Rooms.ToListAsync();
             return View(AdminVM);
         }
-
         
-
-        //get Create Room
-        public IActionResult CreateRoom()
-        {
-            return View();
-        }
-
-
-        //post Create Room
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateRoom(Rooms rooms)
-        {
-            if (ModelState.IsValid)
-            {
-                _db.Add(rooms);
-                await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(rooms);
-        }
-
+     
     }
 }

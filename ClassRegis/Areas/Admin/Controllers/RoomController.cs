@@ -10,41 +10,41 @@ using Microsoft.AspNetCore.Mvc;
 namespace ClassRegis.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class SubjectController : Controller
+    public class RoomController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public SubjectController(ApplicationDbContext db)
+        public RoomController(ApplicationDbContext db)
         {
             _db = db;
 
         }
         public IActionResult Index()
         {
-            return View(_db.Subjects);
+            return View(_db.Rooms);
         }
 
 
 
-        //get Create subject
+        //get Create room
         public IActionResult Create()
         {
             return View();
         }
 
 
-        //post Create subject
+        //post Create room
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create(Subjects subjects)
+        public async Task<IActionResult> Create(Rooms rooms)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(subjects);
+                _db.Add(rooms);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(subjects);
+            return View(rooms);
         }
 
         //get Detail
@@ -55,13 +55,13 @@ namespace ClassRegis.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var subject = await _db.Subjects.FindAsync(id);
-            if (subject == null)
+            var room = await _db.Rooms.FindAsync(id);
+            if (room == null)
             {
                 return NotFound();
             }
-
-            return View(subject);
+            
+            return View(room);
         }
 
         //get Delete
@@ -72,13 +72,13 @@ namespace ClassRegis.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var subjects = await _db.Subjects.FindAsync(id);
-            if (subjects == null)
+            var room = await _db.Rooms.FindAsync(id);
+            if (room == null)
             {
                 return NotFound();
             }
 
-            return View(subjects);
+            return View(room);
         }
 
         //post Delete
@@ -86,8 +86,8 @@ namespace ClassRegis.Areas.Admin.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(int id)
         {
-            var subjects = await _db.Subjects.FindAsync(id);
-            _db.Subjects.Remove(subjects);
+            var room = await _db.Rooms.FindAsync(id);
+            _db.Rooms.Remove(room);
             await _db.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
@@ -100,31 +100,31 @@ namespace ClassRegis.Areas.Admin.Controllers
                 return NotFound();
             }
 
-            var subjects = await _db.Subjects.FindAsync(id);
-            if (subjects == null)
+            var room = await _db.Rooms.FindAsync(id);
+            if (room == null)
             {
                 return NotFound();
             }
 
-            return View(subjects);
+            return View(room);
         }
 
         //post Edit
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, Subjects subjects)
+        public async Task<IActionResult> Edit(int id, Rooms room)
         {
-            if (id != subjects.Id)
+            if (id != room.Id)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                _db.Update(subjects);
+                _db.Update(room);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(subjects);
+            return View(room);
         }
     }
 }

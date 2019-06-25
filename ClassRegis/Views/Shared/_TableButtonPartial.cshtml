@@ -5,13 +5,13 @@
 
 <td style="width:150px">
     <div class="btn-group" role="group">
-        <a type="button" class="btn btn-primary" href="@Url.Action("Edit/"+Model)">
+        <a type="button" class="btn btn-primary" href="@Url.Action("Edit/"+Model).Replace("%2F","/")">
             <i class="far fa-edit"></i>
         </a>
-        <a type="button" class="btn btn-success" href="@Url.Action("Details/"+Model)">
+        <a type="button" class="btn btn-success" href="@Url.Action("Detail/"+Model).Replace("%2F","/")">
             <i class="fas fa-list-alt"></i>
         </a>
-        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+Model)">
+        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+Model).Replace("%2F","/")">
             <i class="fas fa-trash"></i>
         </a>
     </div>

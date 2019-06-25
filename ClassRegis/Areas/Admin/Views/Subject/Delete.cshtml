@@ -1,12 +1,12 @@
 ﻿@model Subjects
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Delete";
 }
 
-<h2>Create Subject</h2>
+<h2>Delete Subject</h2>
 <br /><br />
 
-<form method="post" asp-action="Create">
+<form method="post" asp-action="Delete">
     <div class="p-4 border rounded">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
@@ -14,7 +14,7 @@
                 <label asp-for="Name"></label>
             </div>
             <div class="col-5">
-                <input asp-for="Name" class="form-control" />
+                <input asp-for="Name" readonly class="form-control" />
             </div>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
@@ -23,13 +23,13 @@
                 <label asp-for="Detail"></label>
             </div>
             <div class="col-5">
-                <input asp-for="Detail" class="form-control" />
+                <input asp-for="Detail" readonly class="form-control" />
             </div>
             <span asp-validation-for="Detail" class="text-danger"></span>
         </div>
         <br />
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Create" />
+            <input type="submit" class="btn btn-danger" value="Delete" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>

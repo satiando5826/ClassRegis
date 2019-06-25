@@ -1,77 +1,13 @@
-﻿@model  ClassRegis.Models.ViewModel.AdminVM
+﻿@model ClassRegis.Models.ViewModel.AdminVM
 
 <h2>Admin</h2>
 <br /><br />
 @*Subject*@
-<a asp-action="Create" asp-controller="Subject" class="btn btn-info">Create Subject</a>
-&nbsp;
+<div class="d-table-row">
+    <div class="row">
+        <a asp-action="Index" asp-controller="Subject" class="btn btn-info">Subject</a>
+        &nbsp;&nbsp;&nbsp;
+        <a asp-action="Index" asp-controller="Room" class="btn btn-info">Room</a>
+    </div>
 
-
-<br /><br />
-<table class="table table-striped border">
-    <tr class="table-info">
-        <th>
-            @Html.DisplayNameFor(m => m.Subjects.FirstOrDefault().Name)
-        </th>
-        <th>
-            @Html.DisplayNameFor(m => m.Subjects.FirstOrDefault().Detail)
-        </th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Subjects)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(m => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(m => item.Detail)
-            </td>
-            <td>
-                <partial name="_TableButtonPartial" model="item.Id" />
-            </td>
-
-        </tr>
-
-
-    }
-
-</table>
-
-
-<a asp-action="CreateRoom" class="btn btn-info">Create Room</a>
-<br /><br />
-<table class="table table-striped border">
-    <tr class="table-info">
-        <th>
-            @Html.DisplayNameFor(m => m.Rooms.FirstOrDefault().Name)
-        </th>
-        <th>
-          @*  @Html.DisplayNameFor(m => m.Rooms.FirstOrDefault().Detail) *@
-        </th>
-        <th></th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model.Rooms)
-    {
-        <tr>
-            <td>
-                @Html.DisplayFor(m => item.Name)
-            </td>
-            <td>
-               @*@Html.DisplayFor(m => item.Detail)*@
-            </td>
-            <td>
-                <partial name="_TableButtonPartial" model="item.Id"  />
-            </td>
-
-        </tr>
-
-
-    }
-
-</table>
-
+</div>

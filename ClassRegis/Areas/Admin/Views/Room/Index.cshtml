@@ -1,10 +1,10 @@
-﻿@model  IEnumerable<Subjects>
+﻿@model IEnumerable<Rooms>
 
-<h2>Admin/Subjects</h2>
+<h2>Admin/Rooms</h2>
 <br /><br />
-@*Subject*@
+@*Room*@
 <div class="row">
-    <a asp-area="Admin" asp-controller="Subject" asp-action="Create" class="btn btn-info">Create Subject</a>
+    <a asp-area="Admin" asp-controller="Room" asp-action="Create" class="btn btn-info">Create Room</a>
     &nbsp; &nbsp;
     <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-info">Back to admin</a>
 </div>
@@ -16,7 +16,7 @@
             @Html.DisplayNameFor(m => m.FirstOrDefault().Name)
         </th>
         <th>
-            @Html.DisplayNameFor(m => m.FirstOrDefault().Detail)
+          
         </th>
         <th></th>
         <th></th>
@@ -29,7 +29,7 @@
                 @Html.DisplayFor(m => item.Name)
             </td>
             <td>
-                @Html.DisplayFor(m => item.Detail)
+             
             </td>
             <td>
                 <partial name="_TableButtonPartial" model="item.Id" />
