@@ -6,58 +6,50 @@ using ClassRegis.Data;
 using ClassRegis.Models;
 using ClassRegis.Models.ViewModel;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
-namespace ClassRegis.Areas.Admin
+namespace ClassRegis.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class HomeController : Controller
+    public class SubjectController : Controller
     {
         private readonly ApplicationDbContext _db;
         public AdminVM AdminVM { get; set; }
 
-
-        public HomeController(ApplicationDbContext db)
+        public SubjectController(ApplicationDbContext db)
         {
             _db = db;
-
             AdminVM = new AdminVM()
             {
                 Subjects = _db.Subjects.ToList(),
                 Rooms = _db.Rooms.ToList()
             };
         }
-
-        
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            AdminVM.Subjects = await _db.Subjects.ToListAsync();
-            AdminVM.Rooms = await _db.Rooms.ToListAsync();
-            return View(AdminVM);
+            return View();
         }
 
         
 
-        //get Create Room
-        public IActionResult CreateRoom()
+            //get Create subject
+            public IActionResult Create()
         {
             return View();
         }
 
 
-        //post Create Room
+        //post Create subject
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateRoom(Rooms rooms)
+        public async Task<IActionResult> Create(Subjects subjects)
         {
             if (ModelState.IsValid)
             {
-                _db.Add(rooms);
+                _db.Add(subjects);
                 await _db.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Index),"Home",new { area = "Admin" });
             }
-            return View(rooms);
+            return View(subjects);
         }
-
     }
 }
