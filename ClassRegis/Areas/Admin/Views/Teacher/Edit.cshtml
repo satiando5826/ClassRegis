@@ -1,11 +1,12 @@
-﻿@model Rooms
+﻿@model Teachers
 @{
-    ViewData["Title"] = "CreateRoom";
+    ViewData["Title"] = "Edit";
 }
 
-<h2>CreateRoom</h2>
+<h2>Edit Teacher</h2>
 <br /><br />
-<form method="post" asp-action="CreateRoom">
+
+<form method="post" asp-action="Edit">
     <div class="p-4 border rounded">
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
         <div class="form-group row">
@@ -17,9 +18,10 @@
             </div>
             <span asp-validation-for="Name" class="text-danger"></span>
         </div>
+       
         <br />
         <div class="form-group">
-            <input type="submit" class="btn btn-primary" value="Create" />
+            <input type="submit" class="btn btn-primary" value="Edit" />
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>

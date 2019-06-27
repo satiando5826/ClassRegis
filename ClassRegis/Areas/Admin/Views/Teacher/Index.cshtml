@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Teachers>
+
+<h2>Admin/Teachers</h2>
+<br /><br />
+
+<div class="row">
+    <a asp-area="Admin" asp-controller="Teacher" asp-action="Create" class="btn btn-info">Create Teacher</a>
+    &nbsp; &nbsp;
+    <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-info">Back to Admin</a>
+</div>
+
+<br /><br />
+<table class="table table-striped border">
+    <tr class="table-info">
+        <th>
+            @Html.DisplayNameFor(m => m.FirstOrDefault().Name)
+        </th>
+        <th>
+
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+               
+            </td>
+            <td>
+                <partial name="_TableButtonPartial" model="item.Id" />
+            </td>
+
+        </tr>
+
+
+    }
+
+</table>
+
