@@ -20,5 +20,8 @@ namespace ClassRegis.Data
         public DbSet<Rooms> Rooms { get; set; }
         public DbSet<Classes> Classes { get; set; }
         public DbSet<Students> Students { get; set; }
+        
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+        
     }
 }

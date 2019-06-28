@@ -5,10 +5,13 @@ using System.Threading.Tasks;
 using ClassRegis.Data;
 using ClassRegis.Models;
 using ClassRegis.Models.ViewModel;
+using ClassRegis.Utility;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ClassRegis.Areas.Admin.Controllers
 {
+    [Authorize(Roles = SD.SuperAdminEndUser)]
     [Area("Admin")]
     public class SubjectController : Controller
     {
