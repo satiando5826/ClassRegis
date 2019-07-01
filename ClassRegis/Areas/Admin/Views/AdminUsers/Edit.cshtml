@@ -1,4 +1,5 @@
 ﻿@model ApplicationUser
+@using ClassRegis.Utility
 @{
     ViewData["Title"] = "Edit";
 }
@@ -7,6 +8,7 @@
 <h2 class="text-info">Edit Admin User</h2>
 
 <form method="post" asp-action="Edit">
+    
     <div class="p-4 border rounded">
         <input type="hidden" asp-for="Id" />
         <div asp-validation-summary="ModelOnly" class="text-danger"></div>
@@ -43,6 +45,9 @@
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>
+    
+    
+
 </form>
 
 @section Scripts{

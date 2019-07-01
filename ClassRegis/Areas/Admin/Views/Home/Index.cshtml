@@ -1,17 +1,32 @@
 ﻿@model ClassRegis.Models.ViewModel.AdminVM
-
+@using ClassRegis.Utility
 <h2>Admin</h2>
 <br /><br />
 
 <div class="d-table-row">
-    <div class="row">
-        <a asp-action="Index" asp-controller="Subject" class="btn btn-info">Subject</a>
-        &nbsp;&nbsp;&nbsp;
-        <a asp-action="Index" asp-controller="Room" class="btn btn-info">Room</a>
-        &nbsp;&nbsp;&nbsp;
-        <a asp-action="Index" asp-controller="Teacher" class="btn btn-info">Teacher</a>
-        &nbsp;&nbsp;&nbsp;
-        <a asp-action="Index" asp-controller="AdminUsers" class="btn btn-info">Admin Users</a>
-    </div>
+
+    @if (User.IsInRole(SD.SuperAdminEndUser))
+    {
+        <div class="row">
+            <a asp-action="Index" asp-controller="Subject" class="btn btn-info">Subject</a>
+            &nbsp; &nbsp; &nbsp;
+            <a asp-action="Index" asp-controller="Room" class="btn btn-info">Room</a>
+            &nbsp; &nbsp; &nbsp;
+            <a asp-action="Index" asp-controller="Teacher" class="btn btn-info">Teacher</a>
+            &nbsp; &nbsp; &nbsp;
+            <a asp-action="Index" asp-controller="AdminUsers" class="btn btn-info">Admin Users</a>
+        </div>
+    }
+    @if (User.IsInRole(SD.AdminTeacher))
+    {
+        <div class="row">
+            <a asp-action="Index" asp-controller="Class" class="btn btn-info">Class</a>
+            &nbsp; &nbsp; &nbsp;
+            <a asp-action="Index" asp-controller="Teacher" class="btn btn-info">Teacher</a>
+            &nbsp; &nbsp; &nbsp;
+        </div>
+    }
+
+
 
 </div>

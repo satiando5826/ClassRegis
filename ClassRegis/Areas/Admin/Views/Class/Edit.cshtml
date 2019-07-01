@@ -1,10 +1,9 @@
-﻿@model Teachers
-@using ClassRegis.Utility
+﻿@model Rooms
 @{
     ViewData["Title"] = "Edit";
 }
 
-<h2>Edit Teacher</h2>
+<h2>Edit Room</h2>
 <br /><br />
 
 <form method="post" asp-action="Edit">
@@ -14,28 +13,12 @@
             <div class="col-2">
                 <label asp-for="Name"></label>
             </div>
-            @if (User.IsInRole(SD.SuperAdminEndUser) || (User.Identity.Name).Equals(Model.Email))
-            {
-                <div class="col-5">
-                    <input asp-for="Name" class="form-control" />
-                </div>
-            }
-            else
-            {
-                <div class="col-5">
-                    <input asp-for="Name" readonly class="form-control" />
-                </div>
-            }
-            <br />
-            <div class="col-2">
-                <label asp-for="Email"></label>
-            </div>
             <div class="col-5">
-                <input asp-for="Email" readonly class="form-control" />
+                <input asp-for="Name" class="form-control" />
             </div>
-
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
-
+       
         <br />
         <div class="form-group">
             <input type="submit" class="btn btn-primary" value="Edit" />

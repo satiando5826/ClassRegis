@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace ClassRegis.Areas.Admin
-{   [Authorize(Roles =SD.SuperAdminEndUser)]
+{   [Authorize(Roles =SD.Alluser)]
     [Area("Admin")]
     public class HomeController : Controller
     {

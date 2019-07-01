@@ -10,5 +10,6 @@ namespace ClassRegis.Utility
         public const string EndUser = "Student";
         public const string AdminTeacher = "Teacher";
         public const string SuperAdminEndUser = "Super Admin";
+        public const string Alluser = "Student, Teacher, Super Admin";
     }
 }

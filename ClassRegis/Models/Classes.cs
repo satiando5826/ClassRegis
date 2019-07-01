@@ -13,6 +13,7 @@ namespace ClassRegis.Models
         public int Id { get; set; }
         [Display(Name = "Class Name")]
         public string Name { get; set; }
+
         [Display(Name = "Room number")]
         public int roomId { get; set; }
         [ForeignKey("roomId")]
@@ -22,6 +23,11 @@ namespace ClassRegis.Models
         public int subjectId { get; set; }
         [ForeignKey("subjectId")]
         public virtual Subjects Subjects { get; set; }
+
+        [Display(Name = "Teacher name")]
+        public int teacherId { get; set; }
+        [ForeignKey("teacherId")]
+        public virtual Teachers Teachers { get; set; }
     }
 }
 
