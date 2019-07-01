@@ -123,8 +123,8 @@ namespace ClassRegis.Areas.Admin.Controllers
             {
                 return NotFound();
             }
-
-            return View(classes);
+            ClassVM.Classes = classes;
+            return View(ClassVM);
         }
 
         //post Edit
@@ -138,7 +138,7 @@ namespace ClassRegis.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
-                _db.Update(classes);
+                _db.Update(classes.Id);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }

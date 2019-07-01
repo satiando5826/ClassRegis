@@ -33,25 +33,34 @@
 
     @foreach (var item in Model)
     {
-<tr>
-    <td>
-        @Html.DisplayFor(m => item.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(m => item.Rooms.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(m => item.Subjects.Name)
-    </td>
-    <td>
-        @Html.DisplayFor(m => item.Teachers.Name)
-    </td>
-    <td></td>
-    <td>
-        <partial name="_TableButtonPartial" model="item.Id" />
-    </td>
+        <tr>
+            <td>
+                @Html.DisplayFor(m => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Rooms.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Subjects.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => item.Teachers.Name)
+            </td>
+            <td></td>
+            <td>
+                @if (User.Identity.Name == item.Teachers.Email)
+                {
 
-</tr>
+                    <partial name="_TableButtonPartial" model="item.Id" />
+
+                }
+                else
+                {
+                        <td></td>
+                }
+            </td>
+
+        </tr>
 
 
     }

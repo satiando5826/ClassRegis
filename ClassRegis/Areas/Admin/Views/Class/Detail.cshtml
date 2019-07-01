@@ -1,19 +1,53 @@
-﻿@model Rooms
+﻿@model Classes
 @*
     For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 *@
 <h2>Admin</h2>
 <br /><br />
-@*Room*@
+@*class*@
 
-<tr>
-    <td>
-        @Html.DisplayFor(m => m.Name)
-    </td>
+<div class="p-4 border rounded">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Name"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Name" readonly class="form-control" />
+        </div>
+      
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Rooms.Name"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Rooms.Name" readonly class="form-control" />
+        </div>
+       
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Subjects"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Subjects.Name" readonly class="form-control" />
+        </div>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="Teachers"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="Teachers.Name" readonly class="form-control" />
+        </div>
     
-</tr>
-<br /><br />
-<a asp-area="Admin" asp-controller="Room" asp-action="Edit" class="btn btn-info">Edit</a>
-<a asp-area="Admin" asp-controller="Room" asp-action="Delete" class="btn btn-danger">Delete</a>
-        &nbsp;
-<a asp-area="Admin" asp-controller="Room" asp-action="Index" class="btn btn-primary">Back List</a>
+    </div>
+    <br />
+    <br /><br />
+
+    <a asp-area="Admin" asp-controller="Class" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-info">Edit</a>
+    <a asp-area="Admin" asp-controller="Class" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger">Delete</a>
+    &nbsp;
+    <a asp-area="Admin" asp-controller="Class" asp-action="Index" class="btn btn-primary">Back List</a>
+    </div>
