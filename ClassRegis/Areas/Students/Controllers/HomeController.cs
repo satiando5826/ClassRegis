@@ -19,10 +19,22 @@ namespace ClassRegis.Areas.Students.Controllers
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _db;
-        
+        public ClasssesSearchViewModel classesSearchVM;
         public HomeController(ApplicationDbContext db)
         {
             _db = db;
+            classesSearchVM = new ClasssesSearchViewModel()
+            {
+                Classes = new List<Classes>(),
+                Students = new List<Models.Students>(),
+                StudyClasses = new StudyClasses(),
+                lstStudyClasses = new List<StudyClasses>()
+
+            };
+            classesSearchVM.Classes = _db.Classes.Include(c => c.Rooms)
+                                .Include(c => c.Subjects).Include(c => c.Teachers).ToList();
+            classesSearchVM.Students = _db.Students.ToList();
+            classesSearchVM.lstStudyClasses = _db.StudyClasses.ToList();
         }
 
         public IActionResult Index(string subjectName = null, string classesName = null
@@ -31,15 +43,11 @@ namespace ClassRegis.Areas.Students.Controllers
             var claimsIdentity = (ClaimsIdentity)this.User.Identity;
             var claim = claimsIdentity.FindFirst(ClaimTypes.NameIdentifier);
 
-            ClasssesSearchViewModel classesSearchVM = new ClasssesSearchViewModel()
-            {
-                Classes = new List<Classes>()
-                
-            };
+
 
             classesSearchVM.Classes = _db.Classes.Include(c => c.Rooms)
                                 .Include(c => c.Subjects).Include(c => c.Teachers).ToList();
-            
+            classesSearchVM.Students = _db.Students.ToList();
 
             if (roomName != null)
             {
@@ -63,6 +71,77 @@ namespace ClassRegis.Areas.Students.Controllers
             }
 
             return View(classesSearchVM);
+        }
+
+        //get Add
+        public async Task<IActionResult> Add(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            classesSearchVM.CurrClasses = await _db.Classes.FindAsync(id);
+
+            if (classesSearchVM.CurrClasses == null)
+            {
+                return NotFound();
+            }
+
+            return View(classesSearchVM);
+        }
+        //Post Add
+        [HttpPost, ActionName("Add")]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Addpost(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                classesSearchVM.StudyClasses.classId = id;
+                classesSearchVM.StudyClasses.studentsId = classesSearchVM.Students.Where(s => s.Email == User.Identity.Name).FirstOrDefault().Id;
+                _db.Update(classesSearchVM.StudyClasses);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(classesSearchVM.StudyClasses);
+        }
+
+        //show StudyClass
+        public IActionResult ShowClass()
+        {
+            List<StudyClasses> studyClasses = _db.StudyClasses.ToList();
+            return View(studyClasses);
+        }
+        //get Withdraw
+        public async Task<IActionResult> Withdraw(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var studyclasses = await _db.StudyClasses.FindAsync(id);
+            if (studyclasses == null)
+            {
+                return NotFound();
+            }
+            classesSearchVM.StudyClasses = studyclasses;
+            return View(classesSearchVM.StudyClasses);
+        }
+
+        //Post Withdraw
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Withdraw(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var studyclasses = await _db.StudyClasses.FindAsync(id);
+                _db.Remove(studyclasses);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(classesSearchVM.StudyClasses);
         }
     }
 }

@@ -20,12 +20,14 @@ namespace ClassRegis.Areas.Identity.Pages.Account
         private readonly ApplicationDbContext _db;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
+        public readonly List<Models.Students> students;
 
         public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext db)
         {
             _signInManager = signInManager;
             _logger = logger;
             _db = db;
+            students = _db.Students.ToList();
         }
 
         [BindProperty]
@@ -81,12 +83,12 @@ namespace ClassRegis.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    
-                    if (_db.Students.Where(s=>s.Email.Equals(Input.Email)) != null)
+
+                    if (students.Where(s => s.Email.Equals(Input.Email)).FirstOrDefault() != null)
                     {
                         return LocalRedirect(returnUrl + "Students/");
                     }
-                    return LocalRedirect(returnUrl+"Admin/");
+                    return LocalRedirect(returnUrl + "Admin/");
                 }
                 if (result.RequiresTwoFactor)
                 {

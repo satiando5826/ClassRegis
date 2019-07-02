@@ -2,7 +2,16 @@
 
 
 <form method="get">
-    <h2 class="text-info" style="padding-top:50px;">Class List</h2>
+    <div class="row">
+        <div class="col-2">
+            <h2 class="text-info" style="padding-top:50px;">Class List</h2>
+        </div>
+
+        <div class="col-8"></div>
+        <div class="col">
+            <a asp-area="Students" asp-controller="Home" asp-action="ShowClass" class="btn btn-primary"> Show Added class</a>
+        </div>
+    </div>
     <br />
     <div style="height:150px; background-color:aliceblue" class="container">
 
@@ -93,34 +102,56 @@
                 <th></th>
                 <th></th>
             </tr>
-            @foreach (var item in Model.Classes)
+            @foreach (var classes in Model.Classes)
             {
 
-                <tr>
-                    <td>
-                        @*Class*@
-                        @Html.DisplayFor(m => item.Name)
-                    </td>
-                    <td>
+        <tr>
+            <td>
+                @*Class*@
+                @Html.DisplayFor(m => classes.Name)
+            </td>
+            <td>
 
-                        @Html.DisplayFor(m => item.Subjects.Name)
-                    </td>
+                @Html.DisplayFor(m => classes.Subjects.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => classes.Teachers.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(m => classes.Rooms.Name)
+            </td>
+            <td>
+                @*  @Html.DisplayFor(m => item.CutomerEmail)*@
+            </td>
+            <td>
+                @*  @Html.DisplayFor(m => item.isConfirmed)*@
+            </td>
+            @{
+                bool checkAdded = false;
+                foreach (var studyclass in Model.lstStudyClasses)
+                {
+                    if (studyclass.classId == classes.Id)
+                    {
+                        checkAdded = true;
+                    }
+                }
+                if (!checkAdded)
+                {
                     <td>
-                        @Html.DisplayFor(m => item.Teachers.Name)
+                        <partial name="_StudentsButtonPartial" model="classes.Id" />
                     </td>
-                    <td>
-                        @Html.DisplayFor(m => item.Rooms.Name)
-                    </td>
-                    <td>
-                        @*  @Html.DisplayFor(m => item.CutomerEmail)*@
-                    </td>
-                    <td>
-                        @*  @Html.DisplayFor(m => item.isConfirmed)*@
-                    </td>
-                    <td>
-                        @*_Partial*@
-                    </td>
-                </tr>
+                }
+                else
+                {
+                    <td></td>
+                    <td></td>
+                }
+
+            }
+
+
+
+        </tr>
             }
         </table>
     </div>

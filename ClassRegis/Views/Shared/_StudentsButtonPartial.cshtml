@@ -1,0 +1,24 @@
+﻿@model int
+@*
+    For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
+*@
+
+<td style="width:150px">
+    
+    <div class="btn-group" role="group">
+        @if (!ViewContext.RouteData.Values["action"].ToString().Equals("Withdraw") && !ViewContext.RouteData.Values["action"].ToString().Equals("ShowClass"))
+        {
+            <a type="button" class="btn btn-success" href="@Url.Action("Add/"+Model).Replace("%2F","/")">
+                <i class="far fa-edit"></i>
+            </a>
+        }
+        @if (!ViewContext.RouteData.Values["action"].ToString().Equals("Index"))
+        {
+            <a type="button" class="btn btn-danger" href="@Url.Action("Withdraw/" + Model).Replace("%2F", "/")">
+                <i class="far fa-trash-alt"></i>
+            </a>
+        }
+
+
+    </div>
+    </td>

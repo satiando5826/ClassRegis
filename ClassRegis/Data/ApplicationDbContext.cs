@@ -22,6 +22,6 @@ namespace ClassRegis.Data
         public DbSet<Students> Students { get; set; }
         
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
-        
+        public DbSet<StudyClasses> StudyClasses { get; set; }
     }
 }

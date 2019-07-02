@@ -1,0 +1,63 @@
+﻿@model ClassRegis.Models.ViewModel.ClasssesSearchViewModel
+
+@{
+    ViewData["Title"] = "Add";
+}
+
+<h2>Add Class</h2>
+<br /><br />
+
+<form method="post" asp-action="Add">
+    <input hidden asp-for="CurrClasses.Id" />
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="@Model.CurrClasses.Name"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="@Model.CurrClasses.Name" readonly class="form-control" />
+        </div>
+        <span asp-validation-for="@Model.CurrClasses.Name" class="text-danger"></span>
+
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="@Model.CurrClasses.Rooms.Name"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="@Model.CurrClasses.Rooms.Name" readonly class="form-control" />
+        </div>
+        <span asp-validation-for="@Model.CurrClasses.Rooms.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="@Model.CurrClasses.Subjects"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="@Model.CurrClasses.Subjects.Name" readonly class="form-control" />
+        </div>
+        <span asp-validation-for="@Model.CurrClasses.Subjects.Name" class="text-danger"></span>
+    </div>
+    <div class="form-group row">
+        <div class="col-2">
+            <label asp-for="@Model.CurrClasses.Teachers"></label>
+        </div>
+        <div class="col-5">
+            <input asp-for="@Model.CurrClasses.Teachers.Name" readonly class="form-control" />
+        </div>
+        <span asp-validation-for="@Model.CurrClasses.Teachers.Name" class="text-danger"></span>
+    </div>
+    <br /><br />
+
+    @*<input asp-for="@Model.StudyClasses.classId" hidden value="@Model.CurrClasses.Id" />*@
+
+    <input type="submit" class="btn btn-success" value="Add" />
+
+    &nbsp;
+    <a asp-area="Students" asp-controller="Home" asp-action="Index" class="btn btn-primary">Back to List</a>
+
+</form>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
