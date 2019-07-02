@@ -39,7 +39,7 @@ namespace ClassRegis
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddIdentity<IdentityUser,IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
-                .AddDefaultUI().AddDefaultTokenProviders();
+                .AddDefaultUI().AddDefaultTokenProviders().AddRoles<IdentityRole>();
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
@@ -68,7 +68,7 @@ namespace ClassRegis
             {
                 routes.MapRoute(
                   name: "areas",
-                  template: "{area=Admin}/{controller=Home}/{action=Index}/{id?}"
+                  template: "{area=Students}/{controller=Home}/{action=Index}/{id?}"
                 );
             });
         }

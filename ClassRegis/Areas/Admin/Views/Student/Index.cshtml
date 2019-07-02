@@ -1,10 +1,10 @@
-﻿@model IEnumerable<Teachers>
+﻿@model IEnumerable<Students>
 
 <h2>Admin/Teachers</h2>
 <br /><br />
 
 <div class="row">
-    <a asp-area="Admin" asp-controller="Teacher" asp-action="Create" class="btn btn-info">Create Teacher</a>
+    <a asp-area="Identity" asp-page="/Account/Register" class="btn btn-info">Create Student</a>
     &nbsp; &nbsp;
     <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-info">Back to Admin</a>
 </div>

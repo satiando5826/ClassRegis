@@ -9,19 +9,23 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Logging;
+using ClassRegis.Utility;
+using ClassRegis.Data;
 
 namespace ClassRegis.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
+        private readonly ApplicationDbContext _db;
         private readonly SignInManager<IdentityUser> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger)
+        public LoginModel(SignInManager<IdentityUser> signInManager, ILogger<LoginModel> logger, ApplicationDbContext db)
         {
             _signInManager = signInManager;
             _logger = logger;
+            _db = db;
         }
 
         [BindProperty]
@@ -77,7 +81,12 @@ namespace ClassRegis.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
-                    return LocalRedirect(returnUrl);
+                    
+                    if (_db.Students.Where(s=>s.Email.Equals(Input.Email)) != null)
+                    {
+                        return LocalRedirect(returnUrl + "Students/");
+                    }
+                    return LocalRedirect(returnUrl+"Admin/");
                 }
                 if (result.RequiresTwoFactor)
                 {

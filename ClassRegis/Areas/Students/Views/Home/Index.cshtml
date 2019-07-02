@@ -1,0 +1,127 @@
+﻿@model ClassRegis.Models.ViewModel.ClasssesSearchViewModel
+
+
+<form method="get">
+    <h2 class="text-info" style="padding-top:50px;">Class List</h2>
+    <br />
+    <div style="height:150px; background-color:aliceblue" class="container">
+
+        <div class="col-12">
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Class
+                </div>
+                <div class="col-3">
+                    @Html.Editor("classesName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Subject
+                </div>
+                <div class="col-3">
+                    @Html.Editor("subjectName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+                    Teacher
+                </div>
+                <div class="col-3">
+                    @Html.Editor("teacherName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+                    Room
+                </div>
+                <div class="col-3">
+                    @Html.Editor("roomName", new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="row" style="padding-top:10px;">
+                <div class="col-2">
+
+                </div>
+                <div class="col-3">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-2">
+
+                </div>
+                <div class="col-3">
+                    <button type="submit" name="submit" value="Search" class="btn btn-primary form-control">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <br /><br />
+
+    <div>
+        <br /><br />
+        <table class="table table-striped border">
+            <tr class="table-info">
+                <th>
+                    @Html.DisplayNameFor(m => m.Classes.FirstOrDefault().Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Classes.FirstOrDefault().Subjects)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Classes.FirstOrDefault().Teachers)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(m => m.Classes.FirstOrDefault().Rooms.Name)
+                </th>
+                <th>
+                    @*     @Html.DisplayNameFor(m => m.Appointments.FirstOrDefault().CutomerEmail)*@
+                </th>
+                <th>
+                    @*  @Html.DisplayNameFor(m => m.Appointments.FirstOrDefault().isConfirmed)*@
+                </th>
+                <th></th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model.Classes)
+            {
+
+                <tr>
+                    <td>
+                        @*Class*@
+                        @Html.DisplayFor(m => item.Name)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(m => item.Subjects.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Teachers.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => item.Rooms.Name)
+                    </td>
+                    <td>
+                        @*  @Html.DisplayFor(m => item.CutomerEmail)*@
+                    </td>
+                    <td>
+                        @*  @Html.DisplayFor(m => item.isConfirmed)*@
+                    </td>
+                    <td>
+                        @*_Partial*@
+                    </td>
+                </tr>
+            }
+        </table>
+    </div>
+</form>

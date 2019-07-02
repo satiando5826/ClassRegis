@@ -1,5 +1,6 @@
 ﻿@page
 @model RegisterModel
+@using Utility
 @{
     ViewData["Title"] = "Register";
 }
@@ -38,9 +39,11 @@
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="Input.IsSuperAdmin"></label>
-                <input asp-for="Input.IsSuperAdmin" type="checkbox" class="form-control" />
-                <span asp-validation-for="Input.IsSuperAdmin" class="text-danger"></span>
+                <label asp-for="Input.RoleUser"></label>
+                <input asp-for="Input.RoleUser" type="radio" value="@SD.SuperAdminEndUser" /> @SD.SuperAdminEndUser
+                <input asp-for="Input.RoleUser" type="radio" value="@SD.AdminTeacher" /> @SD.AdminTeacher
+                <input asp-for="Input.RoleUser" type="radio" value="@SD.EndUser" /> @SD.EndUser
+                <span asp-validation-for="Input.RoleUser" class="text-danger"></span>
             </div>
             <button type="submit" class="btn btn-default">Register</button>
         </form>

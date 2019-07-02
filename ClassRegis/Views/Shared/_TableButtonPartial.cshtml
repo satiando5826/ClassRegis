@@ -11,8 +11,11 @@
         <a type="button" class="btn btn-success" href="@Url.Action("Detail/"+Model).Replace("%2F","/")">
             <i class="fas fa-list-alt"></i>
         </a>
-        <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+Model).Replace("%2F","/")">
-            <i class="fas fa-trash"></i>
-        </a>
+        @if (!ViewContext.RouteData.Values["Controller"].ToString().Equals("Teacher"))
+        {
+            <a type="button" class="btn btn-danger" href="@Url.Action("Delete/"+Model).Replace("%2F","/")">
+                <i class="fas fa-trash"></i>
+            </a>
+        }
     </div>
 </td>

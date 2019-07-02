@@ -12,6 +12,7 @@ namespace ClassRegis.Models.ViewModel
         public IEnumerable<Rooms> Rooms { get; set; }
         public IEnumerable<ApplicationUser> ApplicationUser { get; set; }
         
+        
 
     }
 }

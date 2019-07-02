@@ -12,8 +12,9 @@ namespace ClassRegis.Models
     {
         public string Name { get; set; }
         [NotMapped]
-        public bool IsSuperAdmin { get; set; }
+        public string RoleUser { get; set; }
         
+
 
     }
 }
