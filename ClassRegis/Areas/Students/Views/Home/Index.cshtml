@@ -1,5 +1,5 @@
 ﻿@model ClassRegis.Models.ViewModel.ClasssesSearchViewModel
-
+@using ClassRegis.Utility
 
 <form method="get">
     <div class="row">
@@ -9,7 +9,11 @@
 
         <div class="col-8"></div>
         <div class="col">
-            <a asp-area="Students" asp-controller="Home" asp-action="ShowClass" class="btn btn-primary"> Show Added class</a>
+            @if (User.IsInRole(SD.EndUser))
+            {
+                <a asp-area="Students" asp-controller="Home" asp-action="ShowClass" class="btn btn-primary"> Show Added class</a>
+
+            }
         </div>
     </div>
     <br />
@@ -101,57 +105,74 @@
                 </th>
                 <th></th>
                 <th></th>
+                <th></th>
+                <th></th>
             </tr>
             @foreach (var classes in Model.Classes)
             {
 
-        <tr>
-            <td>
-                @*Class*@
-                @Html.DisplayFor(m => classes.Name)
-            </td>
-            <td>
-
-                @Html.DisplayFor(m => classes.Subjects.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(m => classes.Teachers.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(m => classes.Rooms.Name)
-            </td>
-            <td>
-                @*  @Html.DisplayFor(m => item.CutomerEmail)*@
-            </td>
-            <td>
-                @*  @Html.DisplayFor(m => item.isConfirmed)*@
-            </td>
-            @{
-                bool checkAdded = false;
-                foreach (var studyclass in Model.lstStudyClasses)
-                {
-                    if (studyclass.classId == classes.Id)
-                    {
-                        checkAdded = true;
-                    }
-                }
-                if (!checkAdded)
-                {
+                <tr>
                     <td>
-                        <partial name="_StudentsButtonPartial" model="classes.Id" />
+                        @*Class*@
+                        @Html.DisplayFor(m => classes.Name)
                     </td>
-                }
-                else
-                {
-                    <td></td>
-                    <td></td>
-                }
+                    <td>
 
-            }
+                        @Html.DisplayFor(m => classes.Subjects.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => classes.Teachers.Name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(m => classes.Rooms.Name)
+                    </td>
+                    <td>
+                        @*  @Html.DisplayFor(m => item.CutomerEmail)*@
+                    </td>
+                    <td>
+                        @*  @Html.DisplayFor(m => item.isConfirmed)*@
+                    </td>
+
+                    @{
+                        if (User.IsInRole(SD.EndUser))
+                        {
+
+
+                            bool checkAdded = false;
+                            foreach (var studyclass in Model.lstStudyClasses)
+                            {
+                                if (studyclass.classId == classes.Id)
+                                {
+                                    checkAdded = true;
+                                }
+                            }
+                            if (!checkAdded)
+                            {
+                                <td>
+                                    <partial name="_StudentsButtonPartial" model="classes.Id" />
+
+                                </td>
+                            }
+                            else
+                            {
+                                <td></td>
+                                <td></td>
+                            }
+                        }
+                        else
+                        {
+                            <td></td>
+                            <td></td>
+                        }
+                    }
+                    <td>
+                        <partial name="_ShowStudentEnroll" model="classes.Id" />
+
+                    </td>
 
 
 
-        </tr>
+                </tr>
             }
         </table>
     </div>

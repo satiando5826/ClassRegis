@@ -12,5 +12,7 @@ namespace ClassRegis.Models.ViewModel
         public List<Teachers> Teachers { get; set; }
         public Teachers accountTeacher { get; set; }
         public Classes Classes { get; set; }
+
+        public StudyClasses StudyClasses { get; set; }
     }
 }

@@ -50,10 +50,17 @@
     <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
         <a class="navbar-brand nav" href="#">Granite House</a>
         <div class="collapse navbar-collapse">
-            
+            @if (User.IsInRole(SD.AdminTeacher) || User.IsInRole(SD.SuperAdminEndUser))
+            {
+                <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="btn btn-primary">Admin</a>
+
+            }
+            <a asp-area="Students" asp-controller="Home" asp-action="Index" class="btn btn-primary">Student</a>
 
         </div>
+
         <div>
+
             <partial name="_LoginPartial" />
         </div>
     </nav>

@@ -1,6 +1,6 @@
 ﻿@model IEnumerable<Students>
 
-<h2>Admin/Teachers</h2>
+<h2>Admin/Student</h2>
 <br /><br />
 
 <div class="row">
@@ -19,7 +19,7 @@
             @Html.DisplayNameFor(m => m.FirstOrDefault().Email)
         </th>
         <th>
-
+            Class
         </th>
         <th></th>
         <th></th>
@@ -34,7 +34,13 @@
             <td>
                 @Html.DisplayFor(m => item.Email)
             </td>
-            <td></td>
+            <td>
+                @foreach (var studenclass in item.StudyClasses){
+                    <div>@studenclass.Classes.Name</div>
+
+                    }
+
+            </td>
             <td></td>
             @if (User.Identity.Name == item.Email)
             {

@@ -37,7 +37,8 @@ namespace ClassRegis.Areas.Admin
             AdminVM.Rooms = await _db.Rooms.ToListAsync();
             return View(AdminVM);
         }
+
+
         
-     
     }
 }

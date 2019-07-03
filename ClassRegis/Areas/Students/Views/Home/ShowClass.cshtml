@@ -30,36 +30,39 @@
             </th>
             <th></th>
             <th></th>
+            <th></th>
         </tr>
         @foreach (var item in Model)
         {
 
-            <tr>
-                <td>
-                    @*Class*@
-                    @Html.DisplayFor(m => item.Classes.Name)
-                </td>
-                <td>
+    <tr>
+        <td>
+            @*Class*@
+            @Html.DisplayFor(m => item.Classes.Name)
+        </td>
+        <td>
 
-                    @Html.DisplayFor(m => item.Classes.Subjects.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.Classes.Teachers.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(m => item.Classes.Rooms.Name)
-                </td>
-                <td>
-                    @*  @Html.DisplayFor(m => item.CutomerEmail)*@
-                </td>
-                <td>
-                    @*  @Html.DisplayFor(m => item.isConfirmed)*@
-                </td>
-                <td>
-                    <partial name="_StudentsButtonPartial" model="item.Id" />
-                </td>
-               
-            </tr>
+            @Html.DisplayFor(m => item.Classes.Subjects.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.Classes.Teachers.Name)
+        </td>
+        <td>
+            @Html.DisplayFor(m => item.Classes.Rooms.Name)
+        </td>
+        <td>
+            @*  @Html.DisplayFor(m => item.CutomerEmail)*@
+        </td>
+        <td>
+            @*  @Html.DisplayFor(m => item.isConfirmed)*@
+        </td>
+        <td>
+            <partial name="_StudentsButtonPartial" model="item.Id" />
+        </td>
+
+        <partial name="_ShowStudentEnroll" model="item.Id" />
+
+    </tr>
         }
     </table>
 </div>

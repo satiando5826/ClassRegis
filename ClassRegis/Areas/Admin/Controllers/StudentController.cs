@@ -6,6 +6,7 @@ using ClassRegis.Data;
 using ClassRegis.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassRegis.Areas.Admin.Controllers
 {
@@ -23,8 +24,10 @@ namespace ClassRegis.Areas.Admin.Controllers
 
         public IActionResult Index()
         {
-            return View(_db.Students);
+            return View(_db.Students.Include(s=>s.StudyClasses).ToList());
         }//get Create Teacher
+
+
         public IActionResult Create()
         {
             return View();

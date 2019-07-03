@@ -20,6 +20,7 @@
 
     </div>
     }
+
     @if (User.IsInRole(SD.AdminTeacher))
     {
         <div class="row">
@@ -30,6 +31,12 @@
         </div>
     }
 
-
+    @if (User.IsInRole(SD.EndUser))
+    {
+        <br />
+        <div>
+            "*AdminOnly*"
+        </div>
+    }
 
 </div>

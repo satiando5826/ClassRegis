@@ -8,6 +8,7 @@ using ClassRegis.Models.ViewModel;
 using ClassRegis.Utility;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace ClassRegis.Areas.Admin.Controllers
 {
@@ -24,12 +25,18 @@ namespace ClassRegis.Areas.Admin.Controllers
             _db = db;
             ClassVM = new ClassViewModel()
             {
-                Subjects = _db.Subjects.ToList(),
-                Rooms = _db.Rooms.ToList(),
-                Teachers = _db.Teachers.ToList(),
-                Classes = new Models.Classes()
-                
+                Subjects = new List<Subjects>(),
+                Rooms = new List<Rooms>(),
+                Teachers = new List<Teachers>(),
+                Classes = new Models.Classes(),
+                StudyClasses = new StudyClasses()
             };
+            ClassVM.Classes = _db.Classes.Include(c => c.Rooms)
+                                .Include(c => c.Subjects).Include(c => c.Teachers).FirstOrDefault();
+            ClassVM.Subjects = _db.Subjects.ToList();
+            ClassVM.Rooms = _db.Rooms.ToList();
+            ClassVM.Teachers = _db.Teachers.ToList();
+            
         }
 
 
@@ -145,6 +152,19 @@ namespace ClassRegis.Areas.Admin.Controllers
             return View(classes);
         }
 
+        ////show Enrolled
+        public IActionResult ShowEnroll(int? id)
+        {
+            List<StudyClasses> studentclass = _db.StudyClasses.Where(sc => sc.classId == id).Include(sc =>sc.Student).ToList();
+           
+            List<Models.Students> studentEnroll = new List<Models.Students>();
 
+            foreach (var studentss in studentclass)
+            {
+                studentEnroll.Add(studentss.Student);
+            }
+
+            return View(studentEnroll);
+        }
     }
 }

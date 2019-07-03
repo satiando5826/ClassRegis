@@ -69,7 +69,7 @@ namespace ClassRegis.Areas.Students.Controllers
                 classesSearchVM.Classes = classesSearchVM.Classes.Where(r => r.Teachers.Name.ToLower()
                                         .Contains(teacherName.ToLower())).ToList();
             }
-
+            classesSearchVM.lstStudyClasses = _db.StudyClasses.Where(sc => sc.Student.Email == User.Identity.Name).ToList();
             return View(classesSearchVM);
         }
 
@@ -109,7 +109,7 @@ namespace ClassRegis.Areas.Students.Controllers
         //show StudyClass
         public IActionResult ShowClass()
         {
-            List<StudyClasses> studyClasses = _db.StudyClasses.ToList();
+            List<StudyClasses> studyClasses = _db.StudyClasses.Where(sc=>sc.Student.Email == User.Identity.Name).ToList();
             return View(studyClasses);
         }
         //get Withdraw
@@ -134,7 +134,7 @@ namespace ClassRegis.Areas.Students.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Withdraw(int id)
         {
-            if (ModelState.IsValid)
+            if(ModelState.IsValid)
             {
                 var studyclasses = await _db.StudyClasses.FindAsync(id);
                 _db.Remove(studyclasses);
@@ -142,6 +142,20 @@ namespace ClassRegis.Areas.Students.Controllers
                 return RedirectToAction(nameof(Index));
             }
             return View(classesSearchVM.StudyClasses);
+        }
+
+        ////show Enrolled
+        public IActionResult ShowEnroll(int? id)
+        {
+            List<StudyClasses> studentclass = _db.StudyClasses.Where(sc => sc.classId == id).ToList();
+
+            List<Models.Students> studentEnroll = new List<Models.Students>();
+
+            foreach (var studentss in studentclass)
+            {
+                studentEnroll.Add(studentss.Student);
+            }
+            return View(studentEnroll);
         }
     }
 }
