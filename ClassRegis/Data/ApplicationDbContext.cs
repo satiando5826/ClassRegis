@@ -15,10 +15,7 @@ namespace ClassRegis.Data
 
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseLazyLoadingProxies();
-        }
+        
 
         public DbSet<Subjects> Subjects { get; set; }
         public DbSet<Teachers> Teachers { get; set; }
